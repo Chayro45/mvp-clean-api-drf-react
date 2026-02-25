@@ -198,39 +198,39 @@ docker exec minimum_api_backend python manage.py createsuperuser_auto
 ## 📸 Screenshots
 
 ### Login
-![Login Page](docs/screenshots/01-login.png)
+![Login Page](nexus/docs/screenshots/01-login.png)
 *Página de inicio de sesión con validaciones*
 
 ### Dashboard
-![Dashboard](docs/screenshots/02-dashboard.png)
+![Dashboard](nexus/docs/screenshots/02-dashboard.png)
 *Dashboard principal mostrando información del usuario, roles y permisos*
 
 ### Gestión de Usuarios
-![Users List](docs/screenshots/03-users-list.png)
+![Users List](nexus/docs/screenshots/03-users-list.png)
 *Lista de usuarios con búsqueda, filtros y paginación*
 
-![User Create](docs/screenshots/04-user-create.png)
+![User Create](nexus/docs/screenshots/04-user-create.png)
 *Modal de creación de usuario con validaciones*
 
 ### API Documentation (Swagger)
-![Swagger UI](docs/screenshots/06-swagger.png)
+![Swagger UI](nexus/docs/screenshots/06-swagger.png)
 *Documentación interactiva de la API*
 
 ### Docker Containers
-![Docker](docs/screenshots/07-docker-compose.png)
+![Docker](nexus/docs/screenshots/07-docker-compose.png)
 *Servicios corriendo en Docker*
 
 ---
 
 ## 📚 Documentación
 
-- [**Getting Started**](docs/GETTING_STARTED.md) - Guía de inicio rápido
-- [**Architecture**](docs/ARCHITECTURE.md) - Decisiones de arquitectura y patrones
-- [**API Documentation**](docs/API_DOCUMENTATION.md) - Endpoints y ejemplos de uso
-- [**Development**](docs/DEVELOPMENT.md) - Guía para desarrolladores
-- [**Testing**](docs/TESTING.md) - Cómo ejecutar y escribir tests
-- [**Deployment**](docs/DEPLOYMENT.md) - Guía de despliegue (teórica)
-- [**Lessons Learned**](docs/LESSONS_LEARNED.md) - Aprendizajes del proyecto
+- [**Getting Started**](nexus/docs/GETTING_STARTED.md) - Guía de inicio rápido
+- [**Architecture**](nexus/docs/ARCHITECTURE.md) - Decisiones de arquitectura y patrones
+- [**API Documentation**](nexus/docs/API_DOCUMENTATION.md) - Endpoints y ejemplos de uso
+- [**Development**](nexus/docs/DEVELOPMENT.md) - Guía para desarrolladores
+- [**Testing**](nexus/docs/TESTING.md) - Cómo ejecutar y escribir tests
+- [**Deployment**](nexus/docs/DEPLOYMENT.md) - Guía de despliegue (teórica)
+- [**Lessons Learned**](nexus/docs/LESSONS_LEARNED.md) - Aprendizajes del proyecto
 
 ### READMEs Específicos
 - [Backend README](services/backend/README.md)
