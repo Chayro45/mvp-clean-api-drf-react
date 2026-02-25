@@ -80,36 +80,36 @@ Este proyecto **NO** implementa microservicios reales (con comunicación inter-s
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        FRONTEND                              │
+│                        FRONTEND                             │
 │  ┌───────────────────────────────────────────────────────┐  │
 │  │  React + Vite + Tailwind CSS                          │  │
 │  │  • Context API (Auth)                                 │  │
-│  │  • Protected Routes                                    │  │
-│  │  • Axios Interceptors (Auto-refresh JWT)             │  │
+│  │  • Protected Routes                                   │  │
+│  │  • Axios Interceptors (Auto-refresh JWT)              │  │
 │  └───────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────┘
                             ↓ HTTP/REST
 ┌─────────────────────────────────────────────────────────────┐
-│                     BACKEND (Django)                         │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
-│  │   API       │  │   API       │  │   API       │         │
-│  │  (Views)    │  │  (Views)    │  │  (Views)    │         │
-│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘         │
-│         │                 │                 │                │
-│  ┌──────▼──────┐  ┌──────▼──────┐  ┌──────▼──────┐         │
-│  │ Application │  │ Application │  │ Application │         │
-│  │ (Services)  │  │ (Services)  │  │ (Services)  │         │
-│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘         │
-│         │                 │                 │                │
-│  ┌──────▼──────┐  ┌──────▼──────┐  ┌──────▼──────┐         │
-│  │   Domain    │  │   Domain    │  │   Domain    │         │
-│  │  (Models)   │  │  (Models)   │  │  (Models)   │         │
-│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘         │
-│         │                 │                 │                │
-│  ┌──────▼───────────────┬─▼─────────────┬──▼──────┐        │
-│  │ Infrastructure       │               │         │        │
-│  │ • Cache (Redis)      │  PostgreSQL   │  Auth   │        │
-│  └──────────────────────┴───────────────┴─────────┘        │
+│                     BACKEND (Django)                        │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │
+│  │   API       │  │   API       │  │   API       │          │
+│  │  (Views)    │  │  (Views)    │  │  (Views)    │          │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘          │
+│         │                │                │                 │
+│  ┌──────▼──────┐  ┌──────▼──────┐  ┌──────▼──────┐          │
+│  │ Application │  │ Application │  │ Application │          │
+│  │ (Services)  │  │ (Services)  │  │ (Services)  │          │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘          │
+│         │                │                │                 │
+│  ┌──────▼──────┐  ┌──────▼──────┐  ┌──────▼──────┐          │
+│  │   Domain    │  │   Domain    │  │   Domain    │          │
+│  │  (Models)   │  │  (Models)   │  │  (Models)   │          │
+│  └──────┬──────┘  └───────┬─────┘  └──────┬──────┘          │
+│         │                 │               │                 │
+│  ┌──────▼───────────────┬─▼─────────────┬─▼───────┐         │
+│  │ Infrastructure       │               │         │         │
+│  │ • Cache (Redis)      │  PostgreSQL   │  Auth   │         │
+│  └──────────────────────┴───────────────┴─────────┘         │
 └─────────────────────────────────────────────────────────────┘
 
 Apps Desacopladas (simulando microservicios):
@@ -327,8 +327,8 @@ Este proyecto está bajo la Licencia MIT - ver [LICENSE](LICENSE) para detalles.
 
 **Tu Nombre**
 
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
-- LinkedIn: [Tu Perfil](https://linkedin.com/in/tu-perfil)
+- GitHub: [@Chayro45](https://github.com/Chayro45)
+- LinkedIn: [Chayro Ting](https://linkedin.com/in/chayroting)
 
 ---
 
