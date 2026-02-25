@@ -1,0 +1,102 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: minimum_api_nexus_postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - minimum_api_nexus_pg_data:/var/lib/postgresql/data
+    networks:
+      - minimum_api_nexus_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: minimum_api_nexus_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - minimum_api_nexus_redis_data:/data
+    command: redis-server --appendonly yes  # Persistencia
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - minimum_api_nexus_net  # Ajustar al nombre de tu red
+
+  backend:
+    build:
+      context: ../../services/backend
+    container_name: minimum_api_nexus_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../services/backend:/app
+    env_file:
+      - ../env/app.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - minimum_api_nexus_net
+    expose:
+      - "8000"
+    # command: >
+    #   gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    command: >
+      sh -c "
+        echo '🚀 Esperando base de datos...' &&
+        python manage.py wait_for_db &&
+        echo '📦 Ejecutando migraciones...' &&
+        python manage.py migrate &&
+        echo '👥 Creando roles y permisos...' &&
+        python manage.py seed_roles &&
+        echo '👤 Creando superusuario...' &&
+        python manage.py createsuperuser_auto &&
+        echo '👥 Creando usuarios demo...' &&
+        python manage.py seed_demo_data &&
+        echo '✅ Iniciando servidor Django...' &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+
+  frontend:
+    build:
+      context: ../../services/frontend
+      dockerfile: Dockerfile
+    container_name: minimum_api_nexus_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../../services/frontend:/app
+      - /app/node_modules
+    # environment:
+    #   - VITE_API_URL=http://localhost:8000/api
+    depends_on:
+      - backend
+    networks:
+      - minimum_api_nexus_net
+volumes:
+  minimum_api_nexus_pg_data:
+  minimum_api_nexus_redis_data:
+
+networks:
+  minimum_api_nexus_net:
+    driver: bridge
+

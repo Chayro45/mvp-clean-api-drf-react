@@ -1,0 +1,148 @@
+# ==============================================================================
+# Docker Compose - PRODUCCIÓN
+# ==============================================================================
+# 
+# Este archivo es de REFERENCIA para deployment en producción.
+# NO ejecutar directamente sin ajustar variables y secretos.
+#
+# Uso:
+#   docker-compose -f docker-compose.prod.yml up -d
+#
+# ==============================================================================
+
+version: '3.8'
+
+services:
+  # PostgreSQL
+  db:
+    image: postgres:14-alpine
+    container_name: minimum_api_db_prod
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME:-minimum_api}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}  # ⚠️ Usar secrets en producción
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: minimum_api_redis_prod
+    restart: always
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Backend Django
+  backend:
+    build:
+      context: ./services/backend
+      dockerfile: Dockerfile
+      args:
+        - ENVIRONMENT=production
+    container_name: minimum_api_backend_prod
+    restart: always
+    command: >
+      sh -c "
+        python manage.py wait_for_db &&
+        python manage.py migrate &&
+        python manage.py collectstatic --noinput &&
+        gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4 --threads 2 --timeout 60
+      "
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.prod
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=False
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/1
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - backend_network
+      - frontend_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend React
+  frontend:
+    build:
+      context: ./services/frontend
+      dockerfile: Dockerfile.prod
+      args:
+        - VITE_API_URL=${VITE_API_URL}
+    container_name: minimum_api_frontend_prod
+    restart: always
+    networks:
+      - frontend_network
+
+  # Nginx (Reverse Proxy)
+  nginx:
+    image: nginx:alpine
+    container_name: minimum_api_nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./infra/nginx/ssl:/etc/nginx/ssl:ro
+      - static_files:/var/www/static:ro
+      - media_files:/var/www/media:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - frontend_network
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  backend_network:
+    driver: bridge
+  frontend_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  static_files:
+  media_files:
+
+# ==============================================================================
+# NOTAS DE PRODUCCIÓN
+# ==============================================================================
+#
+# 1. Usar docker secrets para credenciales sensibles
+# 2. Configurar HTTPS con Let's Encrypt (certbot)
+# 3. Backup automático de PostgreSQL (ver scripts/backup_db.sh)
+# 4. Monitoreo con Prometheus + Grafana (opcional)
+# 5. Logs centralizados con ELK stack (opcional)
+# 6. Rate limiting en Nginx
+# 7. Variables de entorno desde archivo .env.prod (no commitear)
+#
+# ==============================================================================

@@ -1,0 +1,75 @@
+
+# Core Django
+Django==4.2.17
+python-decouple==3.8  # Para variables de entorno
+
+# Django REST Framework
+djangorestframework==3.15.2
+django-filter==24.3  # Para filtros avanzados
+
+# JWT Authentication
+djangorestframework-simplejwt==5.3.1
+
+# Swagger
+drf-spectacular==0.27.2
+
+# CORS
+django-cors-headers==4.6.0
+
+# Redis Cache
+django-redis==5.4.0
+redis==5.2.1
+
+# WSGI Server (para producción)
+gunicorn==23.0.0
+
+# Database
+psycopg2-binary==2.9.10  # PostgreSQL adapter
+
+# Environment variables
+python-dotenv>=1.0
+
+# Security / utils (base, no opinables)
+django-cors-headers>=4.3
+django-filter>=23.5
+
+# UUID / soft delete / audit helpers (ligero)
+django-model-utils>=4.4
+
+# Utilities
+pytz==2024.2  # Timezone utilities
+
+# Development (opcional)
+ipython==8.30.0  # Better Python shell
+django-extensions==3.2.3  # Management commands extras
+
+# Testing (opcional)
+pytest==8.3.4
+pytest-django==4.9.0
+pytest-cov==6.0.0
+factory-boy==3.3.1  # Test fixtures
+
+# Code Quality (opcional)
+flake8==7.1.1
+black==24.10.0
+isort==5.13.2
+
+
+# ==============================================================================
+# VERSIONES IMPORTANTES
+# ==============================================================================
+# Django 4.2 (LTS - soporte hasta abril 2026)
+# Python 3.12 (compatible)
+# PostgreSQL 14+ (recomendado)
+# Redis 7+ (recomendado)
+
+# ==============================================================================
+# PRODUCCIÓN ADICIONAL (DESCOMENTAR SI NECESITAS)
+# ==============================================================================
+# sentry-sdk==2.18.0  # Error tracking
+# django-storages==1.14.4  # S3, GCS, Azure storage
+# boto3==1.35.75  # AWS SDK (si usas S3)
+# celery==5.4.0  # Task queue
+# django-celery-beat==2.7.0  # Periodic tasks
+# flower==2.0.1  # Celery monitoring
+# whitenoise==6.8.2  # Static files serving

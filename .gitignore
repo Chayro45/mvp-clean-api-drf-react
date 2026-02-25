@@ -1,0 +1,260 @@
+# ==============================================================================
+# .gitignore - Minimum API Project
+# ==============================================================================
+
+# ====================
+# Python / Django
+# ====================
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# Django
+*.log
+*.pot
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static_root/
+
+# Django migrations (opcional: algunos commitean, otros no)
+# **/migrations/*.py
+# !**/migrations/__init__.py
+
+# ====================
+# Node / React / Vite
+# ====================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build outputs
+dist/
+dist-ssr/
+*.local
+
+# Cache
+.cache/
+.parcel-cache/
+.npm/
+.yarn/
+
+# ====================
+# Environment Variables
+# ====================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*
+!.env.example
+
+# ====================
+# IDEs y Editores
+# ====================
+
+# VSCode
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+
+# ====================
+# Operating System
+# ====================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# ====================
+# Docker
+# ====================
+# docker-compose.override.yml (opcional: algunos lo usan para local overrides)
+
+# ====================
+# Logs
+# ====================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ====================
+# Testing
+# ====================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage/
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jest
+coverage/
+
+# ====================
+# Backups
+# ====================
+backups/*.sql
+backups/*.sql.gz
+*.backup
+*.bak
+
+# ====================
+# Temporary files
+# ====================
+tmp/
+temp/
+*.tmp
+
+# ====================
+# Secrets (doble verificación)
+# ====================
+secrets/
+*.pem
+*.key
+!public.key
+*.p12
+*.pfx
+
+# ====================
+# Documentation builds
+# ====================
+docs/_build/
+docs/.doctrees/
+site/
+
+# ====================
+# Package managers
+# ====================
+package-lock.json  # Opcional: algunos lo commitean
+yarn.lock          # Opcional: algunos lo commitean
+pnpm-lock.yaml
+Pipfile.lock       # Opcional
+
+# ====================
+# Compiled files
+# ====================
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ====================
+# Databases
+# ====================
+*.db
+*.sqlite
+*.sqlite3
+
+# ====================
+# Specific to this project
+# ====================
+
+# PostgreSQL data (si se guarda localmente)
+# volumes/postgres/
+
+# Redis data
+# volumes/redis/
+
+# Uploads de usuarios (si se guardan localmente)
+# media/uploads/
+
+# ====================
+# CI/CD
+# ====================
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# ====================
+# Misc
+# ====================
+.sass-cache/
+*.pid
+*.seed
+*.pid.lock
+.npm
+.eslintcache
+.stylelintcache
+.node_repl_history
+*.tgz
+.yarn-integrity
+
+# ==============================================================================
+# Notas:
+# - Algunos archivos listados son opcionales (ej: package-lock.json)
+# - Ajustar según las necesidades específicas del equipo
+# - Archivos .example deben ser commiteados para referencia
+# ==============================================================================
