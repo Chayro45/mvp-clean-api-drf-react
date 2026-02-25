@@ -254,7 +254,7 @@ make test-frontend
 make lint
 ```
 
-Ver [Testing Guide](docs/TESTING.md) para más detalles.
+Ver [Testing Guide](nexus/docs/TESTING.md) para más detalles.
 
 ---
 
@@ -297,7 +297,7 @@ make shell-backend
 make shell-db
 ```
 
-Ver [Makefile](Makefile) para lista completa de comandos.
+Ver [Makefile](nexus/infra/minimum_api_compose/Makefile) para lista completa de comandos.
 
 ---
 
@@ -345,7 +345,7 @@ Este proyecto está bajo la Licencia MIT - ver [LICENSE](LICENSE) para detalles.
 
 Si tienes preguntas o problemas:
 
-1. Revisar la [documentación](docs/)
+1. Revisar la [documentación](nexus/docs/)
 2. Buscar en [Issues](https://github.com/tu-usuario/minimum-api/issues)
 3. Crear un nuevo Issue con detalles
 
