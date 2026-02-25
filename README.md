@@ -233,8 +233,8 @@ docker exec minimum_api_backend python manage.py createsuperuser_auto
 - [**Lessons Learned**](nexus/docs/LESSONS_LEARNED.md) - Aprendizajes del proyecto
 
 ### READMEs Específicos
-- [Backend README](services/backend/README.md)
-- [Frontend README](services/frontend/README.md)
+- [Backend README](nexus/services/backend/README.md)
+- [Frontend README](nexus/services/frontend/README.md)
 
 ---
 
